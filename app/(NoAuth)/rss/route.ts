@@ -12,7 +12,7 @@ export async function GET() {
       <item>
         <title>${post.title}</title>
         <description>${post.excerpt}</description>
-        <link>${process.env.NEXT_PUBLIC_BASE_URL}/blog/${post.slug}</link>
+        <link>${process.env.NEXT_PUBLIC_BASE_URL}/posts/${post.slug}</link>
         <pubDate>${post.publishedAt ? formatISO(post.publishedAt) : ''}</pubDate>
       </item>
     `;
