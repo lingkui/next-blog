@@ -1,0 +1,4 @@
+.next/*
+components/ui/*
+wrangler.jsonc
+pnpm-lock.yaml
