@@ -10,6 +10,8 @@
 - ⚡️ 基于 Next.js 和 Hono.js，性能优秀、部署便捷。
 - 📚 使用 Vditor 实现 Markdown 编辑，提供良好的书写体验。
 - 🎯 支持渲染自定义 React 组件，类似 MDX 体验，内容更灵活。
+- 🔍 支持服务器端渲染 (SSR)，增强 SEO 效果。
+- 📷 集成 OpenGraph 协议，优化社交媒体分享时的预览效果。
 - 💾 通过 Cloudflare D1 和 Drizzle ORM 实现数据库存储，高效可靠。
 - 🎨 UI 采用 Tailwind CSS 和 Shadcn/ui，风格现代、易于定制。
 - 🚀 使用 Cloudflare Pages 部署，全球访问快速稳定。
@@ -18,6 +20,7 @@
 - 框架：Next.js、Hono.js
 - 数据库：Cloudflare D1、Drizzle ORM
 - Markdown 编辑器：Vditor
+- Markdown 解析器：markdown-to-jsx
 - UI 框架：Tailwind CSS、Shadcn/ui
 - 部署平台：Cloudflare Pages
 
@@ -43,7 +46,7 @@ cp .env.example .env.local
 ```
 设置 NEXT_PUBLIC_BASE_URL（博客地址）, AUTH_SECRET
 
-5. 创建本地数据库表结构
+5. 创建本地数据库表结构：
 ```bash
 pnpm db:migrate-local
 ```
@@ -55,9 +58,14 @@ pnpm run dev
 
 ## 🌍 部署到 Cloudflare Pages
 
-1. 执行 <a href="#🚧 开发">🚧 开发</a> 中的步骤 1~4
+1. 执行《🚧 开发》中的步骤 1~4
 
-2. 部署
+2. 创建远程数据库表结构：
+```bash
+pnpm db:migrate-remote
+```
+
+3. 部署：
 ```bash
 pnpm run deploy
 ```
