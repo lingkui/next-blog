@@ -1,6 +1,7 @@
 @import url('https://static.zeoseven.com/zsft/292/main/result.css') layer(base);
 
 @import 'tailwindcss';
+@plugin "tailwindcss-animate";
 @plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:is(.dark *));
