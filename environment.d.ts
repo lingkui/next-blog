@@ -7,6 +7,7 @@ namespace NodeJS {
 
 interface CloudflareEnv {
   DB: D1Database;
+  KV: KVNamespace;
 }
 
 type Env = CloudflareEnv;

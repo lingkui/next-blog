@@ -1,5 +1,6 @@
 'use client';
 
+import NotifyBar from '@/components/notify-bar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
@@ -48,6 +49,7 @@ export default function SetupPageClient() {
         <CardHeader>
           <CardTitle className="text-center text-2xl">Create Account</CardTitle>
           <CardDescription className="text-center">Please fill in the following information to setup</CardDescription>
+          <NotifyBar message="If you want to use LLM, please manually setup the LLM config after setup." type='warning' />
         </CardHeader>
         <CardContent>
           <Form {...form}>

@@ -1,13 +1,22 @@
 {
+  "$schema": "node_modules/wrangler/config-schema.json",
   "name": "blog",
   "compatibility_date": "2024-09-23",
-  "compatibility_flags": ["nodejs_compat"],
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
   "d1_databases": [
     {
       "binding": "DB",
       "database_name": "blog-db",
       "database_id": "65b2aa5d-1267-425e-ac9a-747beb4a199a",
       "migrations_dir": "drizzle"
+    }
+  ],
+  "kv_namespaces": [
+    {
+      "binding": "KV",
+      "id": "4d3d2246470841d6981f070de5205ede"
     }
   ],
   "pages_build_output_dir": ".vercel/output/static"

@@ -15,8 +15,13 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { useCreatePost } from '../api/use-create-post';
 import { createPostSchema } from '../schemas';
+import LLMGenerateDialog from '@/features/ai/components/llm-generate-dialog';
 
-const CreatePostForm = () => {
+interface CreatePostFormProps {
+  isLLMReady?: boolean;
+}
+
+const CreatePostForm = ({ isLLMReady }: CreatePostFormProps) => {
   const router = useRouter();
 
   const { data: tags } = useGetTags();
@@ -110,7 +115,17 @@ const CreatePostForm = () => {
               control={form.control}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Slug</FormLabel>
+                  <FormLabel>
+                    Slug
+                    <LLMGenerateDialog
+                      type="slug"
+                      generateBy={form.getValues('title') || ''}
+                      disabled={!isLLMReady}
+                      onSelect={(content) => {
+                        field.onChange(content);
+                      }}
+                    />
+                  </FormLabel>
                   <FormControl>
                     <Input {...field} value={field.value || ''} placeholder="Enter slug" />
                   </FormControl>
@@ -125,7 +140,17 @@ const CreatePostForm = () => {
             control={form.control}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Excerpt</FormLabel>
+                <FormLabel>
+                  Excerpt
+                  <LLMGenerateDialog
+                    type="excerpt"
+                    generateBy={form.getValues('content') || ''}
+                    disabled={!isLLMReady}
+                    onSelect={(content) => {
+                      field.onChange(content);
+                    }}
+                  />
+                </FormLabel>
                 <FormControl>
                   <Input {...field} value={field.value || ''} placeholder="Enter excerpt" />
                 </FormControl>

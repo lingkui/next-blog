@@ -1,6 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
+import LLMConfigDialog from '@/features/ai/components/llm-config-dialog';
 import { useGetPosts } from '@/features/posts/api/use-get-posts';
 import { PlusIcon } from 'lucide-react';
 import Link from 'next/link';
@@ -17,12 +18,15 @@ export default function DashboardPageClient() {
     <div className="container mx-auto py-8">
       <div className="mb-6 flex items-center justify-between">
         <h1 className="text-2xl font-bold">Articles</h1>
-        <Button asChild>
-          <Link href="/dashboard/posts/create">
-            <PlusIcon />
-            New Article
-          </Link>
-        </Button>
+        <div className="flex items-center gap-2">
+          <LLMConfigDialog />
+          <Button asChild>
+            <Link href="/dashboard/posts/create">
+              <PlusIcon />
+              New Article
+            </Link>
+          </Button>
+        </div>
       </div>
 
       <DataTable

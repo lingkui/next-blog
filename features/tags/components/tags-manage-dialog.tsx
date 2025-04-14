@@ -1,7 +1,14 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { CheckIcon, Loader2, PencilIcon, PlusIcon, SettingsIcon, XIcon } from 'lucide-react';
@@ -76,13 +83,14 @@ const TagsManageDialog = ({ tags }: TagsManageDialogProps) => {
   return (
     <Dialog open={isOpen} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
-        <Button size="icon" variant="ghost" className="h-4 w-4">
+        <Button size="icon" variant="ghost" className="h-4 w-4" title="Tags Manage">
           <SettingsIcon className="h-3 w-3" />
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-2xl">
         <DialogHeader>
           <DialogTitle>Tags Manage</DialogTitle>
+          <DialogDescription>Manage your tags here. You can add, edit, and delete tags.</DialogDescription>
         </DialogHeader>
         <div className="space-y-4">
           <div className="flex items-center gap-2">
@@ -101,7 +109,7 @@ const TagsManageDialog = ({ tags }: TagsManageDialogProps) => {
               }}
             />
             <Button onClick={handleAddTag}>
-              <PlusIcon className="mr-2 h-4 w-4" />
+              <PlusIcon className="h-4 w-4" />
               {isCreating ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Create'}
             </Button>
           </div>

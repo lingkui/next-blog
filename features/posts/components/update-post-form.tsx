@@ -19,14 +19,16 @@ import { useUpdatePostStatus } from '../api/use-update-post-status';
 import { usePostSlug } from '../hooks/use-post-slug';
 import { createPostSchema } from '../schemas';
 import { Post } from '../types';
+import LLMGenerateDialog from '@/features/ai/components/llm-generate-dialog';
 
 interface UpdatePostFormProps {
   initialData: Post;
+  isLLMReady?: boolean;
 }
 
 type PostStatus = 'draft' | 'published';
 
-const UpdatePostForm = ({ initialData }: UpdatePostFormProps) => {
+const UpdatePostForm = ({ initialData, isLLMReady }: UpdatePostFormProps) => {
   const router = useRouter();
 
   const slug = usePostSlug();
@@ -127,7 +129,17 @@ const UpdatePostForm = ({ initialData }: UpdatePostFormProps) => {
               control={form.control}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Slug</FormLabel>
+                  <FormLabel>
+                    Slug
+                    <LLMGenerateDialog
+                      type="slug"
+                      generateBy={form.getValues('title') || ''}
+                      disabled={!isLLMReady}
+                      onSelect={(content) => {
+                        field.onChange(content);
+                      }}
+                    />
+                  </FormLabel>
                   <FormControl>
                     <Input {...field} value={field.value || ''} placeholder="Enter slug" />
                   </FormControl>
@@ -142,7 +154,17 @@ const UpdatePostForm = ({ initialData }: UpdatePostFormProps) => {
             control={form.control}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Excerpt</FormLabel>
+                <FormLabel>
+                  Excerpt
+                  <LLMGenerateDialog
+                    type="excerpt"
+                    generateBy={form.getValues('content') || ''}
+                    disabled={!isLLMReady}
+                    onSelect={(content) => {
+                      field.onChange(content);
+                    }}
+                  />
+                </FormLabel>
                 <FormControl>
                   <Input {...field} value={field.value || ''} placeholder="Enter excerpt" />
                 </FormControl>
