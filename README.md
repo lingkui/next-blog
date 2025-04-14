@@ -24,6 +24,22 @@
 - UI 框架：Tailwind CSS、Shadcn/ui
 - 部署平台：Cloudflare Pages
 
+## 🔑 环境变量
+### 基础配置
+- NEXT_PUBLIC_BASE_URL: 博客 URL 地址
+
+### 认证相关
+- AUTH_SECRET: NextAuth Secret，用来加密 session，请设置一个随机字符串
+
+### Cloudflare 配置
+- CLOUDFLARE_API_TOKEN: Cloudflare API Token
+- CLOUDFLARE_ACCOUNT_ID: Cloudflare Account ID
+- PROJECT_NAME: Pages 项目名（可选，如果不填，则为 next-blog）
+- DATABASE_NAME: D1 数据库名称（可选，如果不填，则为 next-blog-db）
+- DATABASE_ID: D1 数据库 ID (可选, 如果不填, 则会自动通过 Cloudflare API 获取)
+- KV_NAMESPACE_NAME: Cloudflare KV namespace 名称，用于存储网站配置（可选，如果不填，则为 next-blog-kv）
+- KV_NAMESPACE_ID: Cloudflare KV namespace ID，用于存储网站配置 （可选， 如果不填, 则会自动通过 Cloudflare API 获取）
+
 ## 🚧 开发
 
 1. 克隆仓库：
