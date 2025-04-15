@@ -12,7 +12,7 @@ export default async function Header({ className }: { className?: string }) {
 
   return (
     <header className={cn('z-50 bg-gray-100 dark:bg-gray-800', className)}>
-      <div className="container mx-auto flex items-center justify-between p-4">
+      <div className="flex items-center justify-between px-2.5 py-4 md:px-20">
         <Link href="/" className="flex items-center gap-2">
           <Image src="/logo.png" alt="logo" width={32} height={32} />
           <h1 className="text-2xl font-bold">Sunny&apos;s Blog</h1>

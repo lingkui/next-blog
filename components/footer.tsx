@@ -5,7 +5,7 @@ import LoadingBar from './loading-bar';
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-100 py-8 dark:bg-gray-800">
+    <footer className="bg-gray-100 px-2.5 py-8 md:px-20 dark:bg-gray-800">
       <div className="container mx-auto">
         <nav className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           <section className="flex flex-col gap-2">
