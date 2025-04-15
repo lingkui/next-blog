@@ -15,6 +15,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { cn } from '@/lib/utils';
 import { Loader2, WandIcon } from 'lucide-react';
 import { useState } from 'react';
+import { toast } from 'sonner';
 
 interface LLMGenerateDialogProps {
   type: string;
@@ -47,6 +48,12 @@ const LLMGenerateDialog = ({ type, generateBy, disabled, onSelect }: LLMGenerate
         }),
       });
 
+      if (!response.ok) {
+        const { error } = (await response.json()) as { error: string };
+        toast.error(error);
+        return;
+      }
+
       const reader = response.body?.getReader();
       if (!reader) return;
 
@@ -62,7 +69,7 @@ const LLMGenerateDialog = ({ type, generateBy, disabled, onSelect }: LLMGenerate
           // 确保在流式响应结束时获取完整的响应内容
           const finalResponse = fullResponse + buffer;
           setCurrentResponse(finalResponse);
-          setOptions(finalResponse.split(',').map((option) => option.trim()));
+          setOptions(JSON.parse(finalResponse));
           break;
         }
 
@@ -125,17 +132,11 @@ const LLMGenerateDialog = ({ type, generateBy, disabled, onSelect }: LLMGenerate
         <div className="space-y-4">
           <div className="space-y-2">
             <Label>Original</Label>
-            <Textarea value={generateBy} readOnly className="max-h-[100px]resize-none" />
+            <Textarea value={generateBy} readOnly className="max-h-[100px] resize-none" />
           </div>
-
           <div className="space-y-2">
-            <Label>Current Response</Label>
-            <Textarea value={currentResponse} readOnly className="max-h-[100px] resize-none" />
-          </div>
-
-          {isDone && options.length > 0 && (
-            <div className="space-y-2">
-              <Label>Options</Label>
+            <Label>Options</Label>
+            {isDone ? (
               <div className="flex flex-wrap gap-2">
                 {options.map((option, index) => (
                   <Button
@@ -149,8 +150,10 @@ const LLMGenerateDialog = ({ type, generateBy, disabled, onSelect }: LLMGenerate
                   </Button>
                 ))}
               </div>
-            </div>
-          )}
+            ) : (
+              <Textarea value={currentResponse} readOnly />
+            )}
+          </div>
         </div>
         <DialogFooter>
           <Button onClick={handleGenerate} disabled={loading}>
