@@ -45,6 +45,7 @@ jobs:
           KV_NAMESPACE_NAME: ${{ secrets.KV_NAMESPACE_NAME }}
           KV_NAMESPACE_ID: ${{ secrets.KV_NAMESPACE_ID }}
           AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
+          NEXT_PUBLIC_BASE_URL: ${{ secrets.NEXT_PUBLIC_BASE_URL }}
         run: pnpm dlx tsx scripts/deploy/index.ts
 
       # Clean up
